@@ -1,0 +1,27 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="icon" href="data:">
+<script type="module">
+import * as eg from "https://js.sabae.cc/egvr.js";
+
+const path = "obj-at-ideasync-miyukiueda.glb";
+
+const n = 5;
+
+const objs = [];
+for (let i = 0; i < n; i++) {
+  objs.push(eg.model(path));
+}
+setInterval(() => {
+  const t = performance.now();
+  for (let i = 0; i < objs.length; i++) {
+    const o = objs[i];
+    const th = t / 1000 + (Math.PI * 2 / n * i);
+    const l = (Math.cos(t / 500) + 1) * 1;
+    const x = Math.cos(th) * l;
+    const y = Math.sin(th) * l + 1.5;
+    const z = (Math.cos(t / 700) + 1) * .5 - 2;
+    const p = { x, y, z };
+    o.setAttribute("position", p);
+  }
+}, 1000 / 60);
+
+</script>
