@@ -10,6 +10,10 @@ const objs = [];
 for (let i = 0; i < n; i++) {
   objs.push(eg.model(path));
 }
+const lines = [];
+for (let i = 0; i < n; i++) {
+  lines.push(eg.line(0, 0, 0, 0, 0, 1, "white"));
+}
 setInterval(() => {
   const t = performance.now();
   for (let i = 0; i < objs.length; i++) {
@@ -21,6 +25,9 @@ setInterval(() => {
     const z = (Math.cos(t / 700) + 1) * .5 - 2;
     const p = { x, y, z };
     o.setAttribute("position", p);
+
+    const line = lines[i];
+    line.setAttribute("position", { x: p.x, y: p.y + 0.6, z: p.z + t / 60 % 10 });
   }
 }, 1000 / 60);
 
